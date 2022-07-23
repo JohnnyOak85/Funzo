@@ -34,10 +34,4 @@ export const checkMessage = async (message: Message) => {
     respond(message);
     react(message);
     executeCommand(message);
-
-    if (message.content === 'quote') {
-        message.channel.send(
-            "> You can always count on me to not read the entire text and blurt some brain fart at y'all <:praise_sun:670297733038604322> \n *Nazzikene 2022*"
-        );
-    }
 };

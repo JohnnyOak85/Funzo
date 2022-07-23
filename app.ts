@@ -1,6 +1,7 @@
 import { Client } from 'discord.js';
 import { TOKEN } from './config';
 import { checkMessage } from './helpers/messages';
+import { countReactions } from './helpers/reactions';
 import { start } from './helpers/start';
 
 const bot = new Client({
@@ -10,8 +11,9 @@ const bot = new Client({
         'GuildMessages',
         'GuildPresences',
         'GuildMembers',
-        'MessageContent'
-    ]
+        'MessageContent',
+        'GuildMessageReactions'
+    ],
 });
 
 bot.login(TOKEN);
@@ -21,9 +23,17 @@ bot.on('ready', () => {
     console.log('ready');
 });
 
-bot.on('messageUpdate', () => {});
+bot.on('messageReactionAdd', (reaction, user) => {
+    !reaction.partial && countReactions(reaction);
+});
+
+bot.on('messageUpdate', async (oldMessage, newMessage) => {
+    !newMessage?.partial && checkMessage(newMessage);
+});
+
 bot.on('messageCreate', async message => checkMessage(message));
 
 bot.on('error', error => {
     console.log(error);
 });
+

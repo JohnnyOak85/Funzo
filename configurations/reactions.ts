@@ -1,8 +1,6 @@
-interface Dictionary {
-    [x: string]: string;
-}
+import { Dictionary } from '../interfaces';
 
-export const REACTIONS: Dictionary = {
+export const REACTIONS: Dictionary<string> = {
     derp: '672740902048890880',
     fire: '993786721483366441',
     cope: '980189981622566994',
@@ -24,7 +22,7 @@ export const REACTIONS: Dictionary = {
     reversal: '670297748087767050'
 };
 
-export const RESPONSES: Dictionary = {
+export const RESPONSES: Dictionary<string> = {
     retard: 'https://www.youtube.com/watch?v=kav7tifmyTg',
     retarded: 'https://www.youtube.com/watch?v=kav7tifmyTg',
     rtard: 'https://www.youtube.com/watch?v=kav7tifmyTg',
