@@ -1,3 +1,5 @@
 node_modules
 config.ts
 quotes.json
+temp
+configurations/*.json
