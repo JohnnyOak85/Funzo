@@ -9,7 +9,6 @@ module.exports = {
     execute: async (message: Message, args: string[]) => {
         try {
             const mentions = message.mentions.members?.map(member => member.user.username) || [];
-
             const factory = new StoryFactory(mentions[0] || message.author.username);
 
             message.channel.send(factory.getStory());

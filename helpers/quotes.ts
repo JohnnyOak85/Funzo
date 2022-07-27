@@ -1,7 +1,7 @@
 import { readJsonSync } from 'fs-extra';
 import { getRandom } from './utils';
 
-const getQuotes = (): string[] => readJsonSync('./configurations/quotes.json');
+const getQuotes = (): string[] => readJsonSync(`${__dirname}/configurations/quotes.json`);
 
 export const getQuote = () => {
     const quotes = getQuotes();
