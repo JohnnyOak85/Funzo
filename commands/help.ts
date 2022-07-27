@@ -5,7 +5,7 @@ module.exports = {
     name: 'help',
     description:
         'Displays the list of commands. It can also display information on a given command.',
-    usage: '<command>',
+    usage: '',
     execute: async (message: Message, args: string[]) => {
         try {
             args.length

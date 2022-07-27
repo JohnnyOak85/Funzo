@@ -4,7 +4,7 @@ import { getQuote } from '../helpers/quotes';
 module.exports = {
     name: 'quote',
     description: 'Prints a random quote.',
-    usage: '<command>',
+    usage: '',
     execute: async (message: Message, args: string[]) => {
         try {
             message.channel.send(getQuote());

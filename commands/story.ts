@@ -5,7 +5,7 @@ module.exports = {
     name: 'story',
     description:
         'Constructs a random story based on the quoted user, otherwise it will default to the author.',
-    usage: '<command> <user>',
+    usage: '<user>',
     execute: async (message: Message, args: string[]) => {
         try {
             const mentions = message.mentions.members?.map(member => member.user.username) || [];
