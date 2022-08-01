@@ -7,7 +7,7 @@ module.exports = {
     usage: '',
     execute: async (message: Message, args: string[]) => {
         try {
-            message.channel.send(getQuote());
+            message.channel.send(await getQuote());
         } catch (error) {
             console.log(error);
         }
