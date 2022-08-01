@@ -1,13 +1,14 @@
 import { ChannelType, Message } from 'discord.js';
-import { REACTIONS, RESPONSES } from '../configurations/reactions';
 import { executeCommand } from './commands';
+import { getMap } from './redis';
 
-const respond = (message: Message) => {
+const respond = async (message: Message) => {
     const words = message.content.split(' ');
+    const responses = await getMap('responses');
 
     for (const word of words) {
-        if (RESPONSES[word.toLowerCase()]) {
-            message.channel.send(RESPONSES[word.toLowerCase()]);
+        if (responses[word.toLowerCase()]) {
+            message.channel.send(responses[word.toLowerCase()]);
             return;
         }
     }
@@ -16,10 +17,11 @@ const respond = (message: Message) => {
 const react = async (message: Message) => {
     try {
         const words = message.content.split(' ');
+        const reactions = await getMap('reactions');
 
         for (const word of words) {
-            if (REACTIONS[word.toLowerCase()]) {
-                message.react(REACTIONS[word.toLowerCase()]);
+            if (reactions[word.toLowerCase()]) {
+                message.react(reactions[word.toLowerCase()]);
                 return;
             }
         }
