@@ -2,27 +2,29 @@ import { ChannelType, Message } from 'discord.js';
 import { executeCommand } from './commands';
 import { getMap } from './redis';
 
-const respond = async (message: Message) => {
-    const words = message.content.split(' ');
-    const responses = await getMap('responses');
-
-    for (const word of words) {
-        if (responses[word.toLowerCase()]) {
-            message.channel.send(responses[word.toLowerCase()]);
-            return;
-        }
-    }
-};
-
-const react = async (message: Message) => {
+const reactAndRespond = async (message: Message) => {
     try {
-        const words = message.content.split(' ');
+        const words = message.content.toLowerCase().split(' ');
+        const responses = await getMap('responses');
         const reactions = await getMap('reactions');
 
+        let responded = false;
+        let reacted = false;
+
         for (const word of words) {
-            if (reactions[word.toLowerCase()]) {
-                message.react(reactions[word.toLowerCase()]);
-                return;
+            const response = responses[word];
+            const reaction = reactions[word];
+
+            if (responded && reacted) return;
+
+            if (!responded && response) {
+                message.channel.send(response);
+                responded = true;
+            }
+
+            if (!reacted && reaction) {
+                message.react(reaction);
+                reacted = true;
             }
         }
     } catch (error) {
@@ -33,7 +35,6 @@ const react = async (message: Message) => {
 export const checkMessage = async (message: Message) => {
     if (message.channel.type === ChannelType.DM || message.author.bot || !message.guild) return;
 
-    respond(message);
-    react(message);
+    reactAndRespond(message);
     executeCommand(message);
 };
