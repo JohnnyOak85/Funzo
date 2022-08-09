@@ -4,7 +4,7 @@ import { recordBirthday } from '../helpers/bday';
 module.exports = {
     name: 'bday',
     description: `Record a user's birthday`,
-    usage: '<user> <YYYY-MM-DD>',
+    usage: '<user> <MM-DD>',
     execute: async (message: Message, args: string[]) => {
         try {
             const user = message.mentions.users.first();
