@@ -37,9 +37,9 @@ const reactAndRespond = async (message: Message) => {
     }
 };
 
-export const checkMessage = async (message: Message) => {
+export const checkMessage = async (message: Message, botId = '') => {
     if (message.channel.type === ChannelType.DM || message.author.bot || !message.guild) return;
 
     reactAndRespond(message);
-    executeCommand(message);
+    executeCommand(message, botId);
 };

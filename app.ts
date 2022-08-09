@@ -34,7 +34,7 @@ bot.on('messageUpdate', async (oldMessage, newMessage) => {
     !newMessage?.partial && checkMessage(newMessage);
 });
 
-bot.on('messageCreate', async message => checkMessage(message));
+bot.on('messageCreate', async message => checkMessage(message, bot.user?.id));
 
 bot.on('error', error => {
     console.log(error);

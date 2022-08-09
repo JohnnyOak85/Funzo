@@ -8,5 +8,4 @@
  */
 
 export const TOKEN = '[INSERT YOUR TOKEN HERE]';
-export const PREFIX = '!';
 export const REACTION_MAX = 3;
