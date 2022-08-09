@@ -7,13 +7,14 @@ module.exports = {
     usage: '<user> <MM-DD>',
     execute: async (message: Message, args: string[]) => {
         try {
-            const user = message.mentions.users.first();
+            const memberId = args[0].replace('<@', '').replace('>', '');
+            const member = message.mentions.members?.find(member => member.user.id === memberId);
 
-            if (!user) {
+            if (!member) {
                 message.reply('User is invalid');
             }
 
-            message.reply(recordBirthday(user?.id, args[1]));
+            message.reply(recordBirthday(member?.user.id, args[1]));
         } catch (error) {
             console.log(error);
         }
