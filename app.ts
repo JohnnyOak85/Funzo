@@ -4,6 +4,7 @@ import { checkMessage } from './helpers/messages';
 import { countReactions } from './helpers/replies';
 import { start } from './helpers/start';
 import { welcome } from './helpers/welcome';
+import { updateMember } from './helpers/members';
 
 const bot = new Client({
     intents: [
@@ -26,12 +27,16 @@ bot.on('ready', () => {
 
 bot.on('guildMemberAdd', member => welcome(member));
 
+bot.on('guildMemberUpdate', (m, member) => {
+    !member.partial && updateMember(member);
+});
+
 bot.on('messageReactionAdd', (reaction, user) => {
     !reaction.partial && countReactions(reaction);
 });
 
-bot.on('messageUpdate', async (oldMessage, newMessage) => {
-    !newMessage?.partial && checkMessage(newMessage);
+bot.on('messageUpdate', async (m, message) => {
+    !message?.partial && checkMessage(message);
 });
 
 bot.on('messageCreate', async message => checkMessage(message, bot.user?.id));

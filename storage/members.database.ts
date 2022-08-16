@@ -45,6 +45,8 @@ export const saveMember = async (id: string, member: Member) => {
         doc.reminders = Object.assign(doc.reminders || {}, member.reminders);
     }
 
+    delete member.id;
+
     saveMember(id, doc);
 };
 
