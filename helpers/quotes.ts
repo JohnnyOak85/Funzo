@@ -1,5 +1,5 @@
-import { appendList, getList } from './redis';
-import { getRandom } from './utils';
+import { appendList, getList } from '../storage/cache';
+import { getRandom } from '../tools/math';
 
 export const getQuote = async () => {
     try {

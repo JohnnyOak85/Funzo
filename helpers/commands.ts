@@ -1,13 +1,10 @@
 import { Message } from 'discord.js';
 import { readdirSync } from 'fs';
-import { CollectionFactory as Collection } from './collections';
+import { Command } from '../interfaces';
+import { Collector } from '../storage/collections';
+import { reply } from './replies';
 
-const commands = new Collection<{
-    description: string;
-    execute: (message: Message, args?: string[]) => void;
-    name: string;
-    usage: string;
-}>();
+const commands = new Collector<Command>();
 
 export const setCommands = () => {
     try {
@@ -28,7 +25,13 @@ export const executeCommand = (message: Message, botId = '') => {
         args.shift();
         const command = commands.getItem(args.shift()?.toLowerCase() || '');
 
-        if (message.mentions.members?.first()?.id !== botId || !command) return;
+        if (message.mentions.members?.first()?.id !== botId) return;
+
+        if (!command) {
+            reply(message);
+
+            return;
+        }
 
         command.execute(message, args);
     } catch (error) {

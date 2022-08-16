@@ -1,7 +1,7 @@
+import { startDatabase } from '../storage/artemis.database';
 import { setCommands } from './commands';
-import { connect } from './redis';
 
 export const start = () => {
     setCommands();
-    connect();
+    startDatabase();
 };

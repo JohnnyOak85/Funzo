@@ -12,7 +12,7 @@ module.exports = {
             const member = message.mentions.members?.find(member => member.user.id === memberId);
             const factory = new StoryFactory(member?.user.username || message.author.username);
 
-            message.channel.send(factory.getStory());
+            message.channel.send(await factory.getStory());
         } catch (error) {
             console.log(error);
         }

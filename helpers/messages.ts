@@ -1,13 +1,11 @@
 import { ChannelType, Message } from 'discord.js';
+import { getRandom } from '../tools/math';
 import { executeCommand } from './commands';
-import { getMap } from './redis';
-import { getRandom } from './utils';
+import { react, respond } from './replies';
 
 const reactAndRespond = async (message: Message) => {
     try {
         const words = message.content.toLowerCase().split(' ');
-        const responses = await getMap('responses');
-        const reactions = await getMap('reactions');
         const willReact = getRandom(3) === 2;
         const willRespond = getRandom(3) === 2;
 
@@ -17,19 +15,14 @@ const reactAndRespond = async (message: Message) => {
         let reacted = false;
 
         for (const word of words) {
-            const response = responses[word];
-            const reaction = reactions[word];
-
             if (responded && reacted) return;
 
-            if (!responded && willRespond && response) {
-                message.channel.send(response);
-                responded = true;
+            if (!responded && willRespond) {
+                responded = await respond(message, word);
             }
 
-            if (!reacted && willReact && reaction) {
-                message.react(reaction);
-                reacted = true;
+            if (!reacted && willReact) {
+                reacted = await react(message, word);
             }
         }
     } catch (error) {

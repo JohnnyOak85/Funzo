@@ -1,6 +1,6 @@
 {
-    "name": "Funzo",
-    "version": "1.0.0",
+    "name": "Artemis",
+    "version": "2.0.0",
     "description": "",
     "main": "index.js",
     "scripts": {
@@ -12,11 +12,14 @@
     "dependencies": {
         "discord.js": "^14.0.3",
         "fs-extra": "^10.1.0",
+        "moment": "^2.29.4",
+        "pouchdb": "^7.3.0",
         "redis": "^4.2.0",
         "typescript": "^4.7.4"
     },
     "devDependencies": {
         "@types/fs-extra": "^9.0.13",
+        "@types/pouchdb": "^6.4.0",
         "eslint-config-prettier": "^8.5.0",
         "prettier": "^2.7.1"
     }

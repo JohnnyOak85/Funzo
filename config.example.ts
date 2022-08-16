@@ -9,3 +9,4 @@
 
 export const TOKEN = '[INSERT YOUR TOKEN HERE]';
 export const REACTION_MAX = 3;
+export const DB_ADDRESS = '[INSERT YOUR DB ADDRESS HERE]';

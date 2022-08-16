@@ -1,7 +1,7 @@
 import { Client } from 'discord.js';
 import { TOKEN } from './config';
 import { checkMessage } from './helpers/messages';
-import { countReactions } from './helpers/reactions';
+import { countReactions } from './helpers/replies';
 import { start } from './helpers/start';
 import { welcome } from './helpers/welcome';
 

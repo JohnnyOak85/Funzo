@@ -7,7 +7,9 @@ module.exports = {
     usage: '<MM-DD> <message>',
     execute: async (message: Message, args: string[]) => {
         try {
-            message.reply(recordReminder(args.shift(), args.join(' ')));
+            if (!message.member) return;
+
+            message.reply(recordReminder(message.member, args.shift(), args.join(' ')));
         } catch (error) {
             console.log(error);
         }

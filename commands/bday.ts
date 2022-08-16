@@ -12,9 +12,10 @@ module.exports = {
 
             if (!member) {
                 message.reply('User is invalid');
+                return;
             }
 
-            message.reply(recordBirthday(member?.user.id, args[1]));
+            message.reply(recordBirthday(member, args[1]));
         } catch (error) {
             console.log(error);
         }
