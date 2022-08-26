@@ -28,7 +28,7 @@ bot.on('ready', () => {
 bot.on('guildMemberAdd', member => welcome(member));
 
 bot.on('guildMemberUpdate', (m, member) => {
-    !member.partial && updateMember(member);
+    updateMember(member);
 });
 
 bot.on('messageReactionAdd', (reaction, user) => {

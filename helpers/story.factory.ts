@@ -9,7 +9,7 @@ export class StoryFactory {
     private possessive = 'their';
     private love = '';
     private child = '';
-    private decorator: Dictionary<string[]>;
+    private decorator: Dictionary<string[]> = {};
 
     constructor(name: string) {
         this.character = name;

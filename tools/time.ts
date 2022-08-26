@@ -4,10 +4,7 @@ const DATE_REGEX = /(0[1-9]|1[012])\-(0[1-9]|[12][0-9]|3[01])$/gm;
 
 export const isValidDate = (date: string) => date.length === 5 || DATE_REGEX.test(date);
 
-export const addYear = (date: number | moment.Moment) =>
-    moment(date)
-        .set('year', moment().get('year') + 1)
-        .valueOf();
+export const addYear = (date: number | moment.Moment) => moment(date).add(1, 'year').valueOf();
 
 export const checkYear = (incomingDate: number | moment.Moment) => {
     const now = moment();
@@ -30,5 +27,3 @@ export const setDateValue = (dateString: string) => {
 };
 
 export const getTimer = (id: string, cb: any, timeout: number) => setTimeout(() => cb(id), timeout);
-
-export const resetTime = () => {};
