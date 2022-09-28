@@ -50,7 +50,6 @@ export class StoryFactory {
         this.decorator.countries = await getList('countries');
         this.decorator.currencies = await getList('currencies');
 
-        console.log(this.decorator.burns)
         for (const block of blocks) {
             story = story + this.constructBlock(block);
         }
