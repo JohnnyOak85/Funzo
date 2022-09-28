@@ -1,3 +1,4 @@
+import PouchDB from 'pouchdb';
 import { DB_ADDRESS } from '../config';
 import { BlockDoc, Dictionary } from '../interfaces';
 import { pushList } from './cache';
