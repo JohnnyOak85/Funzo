@@ -15,7 +15,7 @@ export const getDecorators = async () => {
     };
 };
 
-export const startDatabase = async () => {
+export const startStoryDatabase = async () => {
     await db.info();
 
     const [blocks, decorators] = await Promise.all([getBlocks(), getDecorators()]);
