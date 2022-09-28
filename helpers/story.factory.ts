@@ -25,7 +25,7 @@ export class StoryFactory {
         this.love = this.getNoun('guy', 'girl');
     };
 
-    private constructBlock = async (block: string[]) =>
+    private constructBlock = (block: string[]) =>
         block[getRandom(block.length) - 1]
             .replace(/§burn/g, this.getDecoration(this.decorator.burns))
             .replace(/§character/g, this.character)
@@ -50,6 +50,7 @@ export class StoryFactory {
         this.decorator.countries = await getList('countries');
         this.decorator.currencies = await getList('currencies');
 
+        console.log(this.decorator.burns)
         for (const block of blocks) {
             story = story + this.constructBlock(block);
         }
