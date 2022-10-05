@@ -1,4 +1,4 @@
-import { appendList, getList } from '../storage/cache';
+import { saveList, getList } from '../storage/cache';
 import { getRandom } from '../tools/math';
 
 export const getQuote = async () => {
@@ -16,5 +16,5 @@ export const getQuote = async () => {
 };
 
 export const addQuote = (quote: string, author: string) => {
-    appendList('quotes', `> ${quote} *${author} ${new Date().getFullYear()}*`);
+    saveList('quotes', [`> ${quote} *${author} ${new Date().getFullYear()}*`]);
 };

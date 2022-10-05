@@ -1,7 +1,7 @@
 import PouchDB from 'pouchdb';
 import { DB_ADDRESS } from '../config';
 import { BlockDoc, Dictionary } from '../interfaces';
-import { pushList } from './cache';
+import { saveList } from './cache';
 
 const db = new PouchDB(`${DB_ADDRESS}/story`);
 
@@ -21,10 +21,10 @@ export const startStoryDatabase = async () => {
 
     const [blocks, decorators] = await Promise.all([getBlocks(), getDecorators()]);
 
-    pushList('burns', decorators.burns);
-    pushList('countries', decorators.countries);
-    pushList('currencies', decorators.currencies);
-    pushList(
+    saveList('burns', decorators.burns);
+    saveList('countries', decorators.countries);
+    saveList('currencies', decorators.currencies);
+    saveList(
         'blocks',
         blocks.map(block => JSON.stringify(block))
     );
