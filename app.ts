@@ -1,12 +1,12 @@
 import { Client } from 'discord.js';
-import { TOKEN } from './config';
+import { GUILD_ID, TOKEN } from './config';
 import { checkMessage } from './helpers/messages';
 import { countReactions } from './helpers/replies';
 import { start } from './helpers/start';
 import { welcome } from './helpers/welcome';
 import { updateMember } from './helpers/members';
 
-const bot = new Client({
+const client = new Client({
     intents: [
         'Guilds',
         'GuildEmojisAndStickers',
@@ -18,29 +18,31 @@ const bot = new Client({
     ]
 });
 
-bot.login(TOKEN);
+client.login(TOKEN);
 
-bot.on('ready', () => {
-    start();
+client.on('ready', async () => {
+    const guild = await client.guilds.fetch(GUILD_ID);
+
+    start(guild);
     console.log('ready');
 });
 
-bot.on('guildMemberAdd', member => welcome(member));
+client.on('guildMemberAdd', member => welcome(member));
 
-bot.on('guildMemberUpdate', (m, member) => {
+client.on('guildMemberUpdate', (m, member) => {
     updateMember(member);
 });
 
-bot.on('messageReactionAdd', (reaction, user) => {
+client.on('messageReactionAdd', (reaction, user) => {
     !reaction.partial && countReactions(reaction);
 });
 
-bot.on('messageUpdate', async (m, message) => {
+client.on('messageUpdate', async (m, message) => {
     !message?.partial && checkMessage(message);
 });
 
-bot.on('messageCreate', async message => checkMessage(message, bot.user?.id));
+client.on('messageCreate', async message => checkMessage(message, client.user?.id));
 
-bot.on('error', error => {
+client.on('error', error => {
     console.log(error);
 });

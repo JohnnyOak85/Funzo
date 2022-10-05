@@ -8,8 +8,6 @@ const db = new PouchDB<SpeechDoc>(`${DB_ADDRESS}/artemis`);
 const getSpeech = async (id: string) => (await db.get(id)).list;
 
 export const startDatabase = async () => {
-    await startCache();
-
     const [prompts, quotes, reactions, responses, welcomes] = await Promise.all([
         getSpeech('prompts') as Promise<string[]>,
         getSpeech('quotes') as Promise<string[]>,
@@ -17,6 +15,8 @@ export const startDatabase = async () => {
         getSpeech('responses') as Promise<Dictionary<string>>,
         getSpeech('welcomes') as Promise<string[]>
     ]);
+
+    await startCache();
 
     saveList('prompts', prompts);
     saveList('quotes', quotes);

@@ -50,7 +50,7 @@ export const saveMember = async (id: string, member: Member) => {
     saveMember(id, doc);
 };
 
-export const startDatabase = async (guild: Guild) => {
+export const startMemberDatabase = async (guild: Guild) => {
     await db.info();
 
     const members = await getMemberList();
